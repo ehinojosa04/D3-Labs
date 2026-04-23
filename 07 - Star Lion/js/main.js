@@ -2,15 +2,19 @@
 *    main.js
 */
 
-d3.json("data/buildings.json").then(data => {
+/*
+*    main.js
+*/
+
+d3.json("data/revenues.json").then(data => {
     data.forEach(d => {
-        d.height = +d.height
+        d.revenue = +d.revenue
     });
     
     console.log(data)
 
-    var max_h = d3.max(data, d => d.height)
-    var m = {l: 100, t: 10, r: 10, b: 150}
+    var max_h = d3.max(data, d => d.revenue)
+    var m = {l: 100, t: 10, r: 10, b: 100}
     var ch = 400
     var cw = 600
 
@@ -25,7 +29,7 @@ d3.json("data/buildings.json").then(data => {
         .attr("transform", "translate(" + m.l + ", " + m.t + ")");
         
     var x = d3.scaleBand()
-        .domain(data.map(d => d.name))
+        .domain(data.map(d => d.month))
         .range([0,w])
         .paddingInner(0.3)
         .paddingOuter(0.3)
@@ -37,27 +41,27 @@ d3.json("data/buildings.json").then(data => {
         .attr("transform", "translate(0, " + h + ")")
         .call(bottomAxis)
         .selectAll("text")
-        .attr("y", "10")
-        .attr("x", "-5")
-        .attr("text-anchor", "end")
-        .attr("transform", "rotate(-40)")
+        // .attr("y", "10")
+        // .attr("x", "-5")
+        // .attr("text-anchor", "end")
+        // .attr("transform", "rotate(-40)")
     
     g.append("text")
         .attr("class", "x axis-label")
         .attr("x", w / 2)
-        .attr("y", h + 140)
+        .attr("y", h + 40)
         .attr("font-size", "16px")
         .attr("text-anchor", "middle")
-        .text("The world's tallest buildings");
+        .text("Month");
 
     g.append("text")
         .attr("class", "y axis-label")
         .attr("x", -(h / 2))
-        .attr("y", -60)
+        .attr("y", -40)
         .attr("font-size", "16px")
         .attr("text-anchor", "middle")
         .attr("transform", "rotate(-90)")
-        .text("Height (m)");
+        .text("Revenue (dlls.)");
 
     var y = d3.scaleLinear()
         .domain([0,max_h])
@@ -65,21 +69,21 @@ d3.json("data/buildings.json").then(data => {
 
     var leftAxis = d3.axisLeft(y)
         .ticks(5)
-        .tickFormat(d => d + " m")
+        .tickFormat(d => d/1000 + " k")
 
     g.append("g")
     .attr("class", "left axis")
     .call(leftAxis)
 
     const color = d3.scaleOrdinal()
-    .domain(data.map(d => d.name))
+    .domain(data.map(d => d.month))
     .range(d3.schemeSet3)
 
     g.selectAll("rect")
         .data(data).enter().append("rect")
-            .attr("x", d => x(d.name))
-            .attr("y", d => y(d.height))
+            .attr("x", d => x(d.month))
+            .attr("y", d => y(d.revenue))
             .attr("width", x.bandwidth())
-            .attr("height", d => h - y(d.height))
-            .attr("fill", d => color(d.name))
+            .attr("height", d => h - y(d.revenue))
+            .attr("fill", d => color(d.month))
 })
