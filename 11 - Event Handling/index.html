@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Leaf Project</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img id="logo" src="img/logo.png" alt="Leaf Logo" style="max-height: 40px;">
+            </a>      
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="mb-4 bg-white p-3 rounded shadow-sm border">
+            
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                <button id="pause-btn" class="btn btn-primary px-4">Pause</button>
+                <button id="reset-btn" class="btn btn-outline-secondary px-4">Reset</button>
+                <select id="continent-select" class="form-select w-auto"></select>
+            </div>
+            
+            <div class="d-flex align-items-center gap-3">
+                <label for="year-slider" id="slider-label" class="form-label fw-bold mb-0 text-muted" style="min-width: 85px;">Year: 1800</label>
+                <input 
+                    type="range" 
+                    class="form-range w-100" 
+                    id="year-slider" 
+                    min="0" 
+                    max="100" 
+                    step="1" 
+                    value="0"
+                >
+                <span id="slider-value" class="visually-hidden"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div id="chart-area" class="bg-white rounded shadow-sm border p-3 d-flex justify-content-center min-vh-50"></div>  
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js"></script>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

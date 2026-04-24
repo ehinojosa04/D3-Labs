@@ -59,8 +59,8 @@ var yAxisGroup = g.append("g")
 
 var yearLabel = g.append("text")
     .attr("class", "year-label")
-    .attr("x", w - 50)          // right side
-    .attr("y", h - 20)          // near bottom
+    .attr("x", w - 50)
+    .attr("y", h - 20)
     .attr("text-anchor", "end")
     .attr("font-size", "40px")
     .attr("fill", "gray")
